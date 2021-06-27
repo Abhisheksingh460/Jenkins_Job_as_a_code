@@ -1,0 +1,23 @@
+job ('jobbycode') {
+      description ('job created by code')
+  
+     steps {
+       
+        maven {
+            goals('package')
+            mavenInstallation('mymaven')
+                       
+        }
+        shell ('java -jar target/*.jar')
+       
+    }
+  
+     scm {
+        github(ownerAndProject = 'Abhisheksingh460/simple-java-maven-app', branch = 'master')
+    }
+     publishers {
+        archiveArtifacts('target/*.jar')
+        archiveJunit('target/surefire-reports/*.xml')
+    }
+     
+}
